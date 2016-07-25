@@ -15,7 +15,10 @@ set pastetoggle=<F10>
 set autoindent
 set tabstop=3
 
+" usefule mappings:
 map <S-Return> <Esc>
+map <C-j> 10j
+map <C-k> 10k
 
 " Plug
 call plug#begin('~/.vim/plugged')
