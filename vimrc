@@ -13,6 +13,7 @@ set number
 " editor thinks its smarter than me
 set pastetoggle=<F10>
 set autoindent
+set tabstop=2
 
 map <S-Return> <Esc>
 
