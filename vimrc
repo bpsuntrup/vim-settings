@@ -26,12 +26,13 @@ map <C-j> 10j
 map <C-k> 10k
 map <Space> :NERDTreeToggle<CR>
 
-" window movement. I would like to just use Control, but I really like my <C-j/k>
-" mappings for now
-map <C-S-j> <C-w>j
-map <C-S-h> <C-w>h
-map <C-S-k> <C-w>k
-map <C-S-l> <C-w>l
+" window movement. 
+map gj <C-w>j
+map gh <C-w>h
+map gk <C-w>k
+map gl <C-w>l
+map gs <C-w>s
+map gv <C-w>v
 
 " TODO: need to find out how to prettify up the vim plugins. Maybe i want to
 " learn how to manage my vim plugins more manually. The packages I download don't seem
