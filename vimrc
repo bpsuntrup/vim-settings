@@ -20,7 +20,7 @@ set pastetoggle=<F10>
 set autoindent
 set tabstop=3
 
-" usefule mappings:
+" useful mappings:
 map <S-Return> <Esc>
 map <C-j> 10j
 map <C-k> 10k
@@ -33,6 +33,19 @@ map gk <C-w>k
 map gl <C-w>l
 map gs <C-w>s
 map gv <C-w>v
+
+" macros
+   " indent and unindent. Note that I map to the tab key, which can
+	" be expanded into the number of spaces I like best or left as tabs
+   let @i = '0i	j'
+	let @u = '0xj'
+
+	" comment and strip comment. TODO: this works for c++ style comments, but
+	" I should develop some way of doing line by line comments for different
+	" filetypes. For now all I do is javascript, though, so when I get back to 
+	" python, this will probably need to be addressed.
+	let @c = '^i// j'
+	let @s = '^xxxj'
 
 " TODO: need to find out how to prettify up the vim plugins. Maybe i want to
 " learn how to manage my vim plugins more manually. The packages I download don't seem
