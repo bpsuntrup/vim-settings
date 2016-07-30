@@ -34,6 +34,10 @@ map gl <C-w>l
 map gs <C-w>s
 map gv <C-w>v
 
+" filetype specific stuff. Maybe this should go in the .vim folder. IDK.
+  " make text files 80 characters wide
+  au BufRead,BufNewFile *.txt setlocal textwidth=80
+
 " macros
    " indent and unindent. Note that I map to the tab key, which can
 	" be expanded into the number of spaces I like best or left as tabs
