@@ -17,8 +17,9 @@ set number
 " indentation. Set paste makes all input literal... because I hate when the
 " editor thinks its smarter than me
 set pastetoggle=<F10>
-set autoindent
+set noautoindent
 set tabstop=3
+
 
 " useful mappings:
 map <S-Return> <Esc>
