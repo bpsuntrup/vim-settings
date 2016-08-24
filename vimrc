@@ -18,8 +18,18 @@ set number
 " editor thinks its smarter than me
 set pastetoggle=<F10>
 set noautoindent
-set tabstop=3
-
+set tabstop=2
+set expandtab
+function Ettoggle()
+  if &expandtab == "noexpandtab"
+    echom "expandtab set"
+    set expandtab
+  else
+    echom "noexpandtab set"
+    set noexpandtab
+  endif
+endfunction
+map <F11> :call Ettoggle()<CR>
 
 " useful mappings:
 map <S-Return> <Esc>
