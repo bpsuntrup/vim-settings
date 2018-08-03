@@ -63,7 +63,7 @@ map <F12> :call Numbertoggle()<CR>
 " indentation. Set paste makes all input literal... because I hate when the
 " editor thinks its smarter than me
 set pastetoggle=<F10>
-set noautoindent
+set autoindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
