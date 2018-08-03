@@ -15,6 +15,38 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+
+"    \   'ctermfgs': ['red', 'Orange1', 'yellow', 'green', 'blue', 'purple'],
+
+" Rainbow config.
+    let g:rainbow_conf = {
+    \   'guifgs': ['firebrick','darkorange', 'gold', 'seagreen','royalblue',  'darkorchid1'],
+    \   'ctermfgs': [196, 208, 226, 46,117, 92, 177],
+    \   'operators': '_,_',
+    \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+    \   'separately': {
+    \       '*': {},
+    \       'tex': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+    \       },
+    \       'lisp': {
+    \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid1'],
+    \       },
+    \       'clj': {
+    \           'guifgs': ['firebrick','darkorange', 'gold', 'seagreen','royalblue',  'darkorchid1'],
+    \       },
+    \       'vim': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+    \       },
+    \       'html': {
+    \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+    \       },
+    \       'css': 0,
+    \   }
+    \}
+map <F9> :RainbowToggle
+au VimEnter * RainbowToggle
+
 " I like line numbers. Should be able to toggle them, though
 set number
 function Numbertoggle()
@@ -56,6 +88,8 @@ map ; :
 
 
 " window movement. 
+noremap zj gj
+noremap zk gk
 map gj <C-w>j
 map gh <C-w>h
 map gk <C-w>k
