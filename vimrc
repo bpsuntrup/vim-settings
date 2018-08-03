@@ -88,11 +88,11 @@ map <C-j> 10j
 map <C-k> 10k
 map <Space> :NERDTreeToggle<CR>
 map ; :
-
-
-" window movement. 
 noremap zj gj
 noremap zk gk
+map , \
+
+" window movement. 
 map gj <C-w>j
 map gh <C-w>h
 map gk <C-w>k
@@ -100,20 +100,6 @@ map gl <C-w>l
 map gs <C-w>s
 map gv <C-w>v
 
-" filetype specific stuff. Maybe this should go in the .vim folder. IDK.
-  " make text files 80 characters wide
-au BufRead,BufNewFile *.txt setlocal textwidth=80
+" RANDOM: make text files 100 characters wide
+au BufRead,BufNewFile *.txt setlocal textwidth=100
 
-" MACROS
-" ======
-
-" comment and strip comment. TODO: this works for c++ style comments, but
-" I should develop some way of doing line by line comments for different
-" filetypes. For now all I do is javascript, though, so when I get back to 
-" python, this will probably need to be addressed.
-let @c = '^i// j'
-let @s = '^xxxj'
-
-" TODO: need to find out how to prettify up the vim plugins. Maybe i want to
-" learn how to manage my vim plugins more manually. The packages I download don't seem
-" that big after all. They're usually only one file.
