@@ -6,6 +6,7 @@ execute pathogen#infect()
 
 " Don't know what this stuff does...
 syntax on
+filetype plugin on
 
 " I think this takes care of some NERDTree related things that make it easier
 " to use. So I don't want NERDTree when I open a file with vim, but when I
@@ -67,6 +68,8 @@ set autoindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+    " For clojure, I like two spaces
+    au FileType clojure setl ts=2 sw=2 sts=2
 set expandtab
 function Ettoggle()
   if &expandtab == "noexpandtab"

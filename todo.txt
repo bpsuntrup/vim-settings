@@ -1,2 +1,0 @@
-I would like python to have a tabstop of 3 and expanded tabs, but that's getting
-set by the system currently. Find out how to fix that
