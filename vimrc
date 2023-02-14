@@ -1,23 +1,29 @@
-" vimrc. Create a link in the home directory called .vimrc and point it to
-" this file
-"
+" Make vim obey XDG:
+set directory=$XDG_CACHE_HOME/vim,~/,/tmp
+set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+
 " I like:
 " auto-pairs          -- smart parentheses
 " flygrep             -- easy/fast grep in vim (TODO: this package kinda sucks i.e. it greps current folder,
 "                                               not the current buffer)
-" nerdcommenter       -- auto-comment with ,c
+" nerdcommenter       -- auto-comment with ,c (should probably remove)
 " nerdtree            -- file explorer
 " nerdtree-git-plugin -- git enhancement for file explorer
-" rainbow             -- enhanced parentheses highlighting
-" syntastic           -- syntax-checking ( This actually sucks, so it's
-"                        actually removed.)
+" vim-noscrollbar     -- cut little scrollbar
 
 " Thanks, Tim Pope
+let g:pathogen_disabled = ['vim-perl', 'nerdcommenter']
 execute pathogen#infect()
 
 " Don't know what this stuff does...
 syntax on
 filetype plugin on
+
+" Autopairs customization
+" I hate autopairing quotes, for some reason.
+let g:AutoPairsCenterLine = 0
+let g:AutoPairs = {} "'(':')', '[':']', '{':'}'}
 
 " I think this takes care of some NERDTree related things that make it easier
 " to use. So I don't want NERDTree when I open a file with vim, but when I
@@ -27,56 +33,22 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Rainbow config. I haven't got a clue how this works
-" TODO: read README for this, any docs I can find, figure out how to sanely
-" color < and > as delimiters for complicated Rust generics
-" TODO: get a less bloated version of Rainbow
-"\   'guifgs': [196, 208, 226, 46,117, 92, 177],
-let g:rainbow_conf = {
-\   'ctermfgs': [196, 208, 226, 46,117, 92, 177],
-\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-\   'seperately': {
-\       'html': {
-\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-\       },
-\       'javascript.jsx': {
-\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-\       },
-\   }
-\}
-map <F9> :RainbowToggle<CR>
-au VimEnter * RainbowToggle
+" Clipboard:
+function! Clip()
+    call writefile(getreg('"', 1, 1), "/tmp/clip")
+    execute "!cat /tmp/clip | xclip -selection clipboard"
+    silent execute "!rm /tmp/clip"
+endfunction
 
-" Syntastic stuff:
-    "set statusline+=%#warningmsg#
-    "set statusline+=%{SyntasticStatuslineFlag()}
-    "set statusline+=%*
+" gtd things:
+nnoremap <leader>c 0r+
 
-    "let g:syntastic_always_populate_loc_list = 0
-    "let g:syntastic_auto_loc_list = 0
-    "let g:syntastic_check_on_open = 0
-    "let g:syntastic_check_on_wq = 0
-    "noremap <leader>m :lnext<CR>
-    "noremap <leader>n :lprevious<CR>
-    "noremap <leader>? :SyntasticReset<CR> :SyntasticCheck<CR>
-    "noremap <leader>r :SyntasticReset<CR>
-	"let ErrorToggle = 0
-    "function ToggleError()
-		"if g:ErrorToggle == 0
-            "execute "SyntasticReset"
-            "execute "SyntasticCheck"
-			"execute "Error"
-			"let g:ErrorToggle = 1
-		"else
-			"execute "lclose"
-			"let g:ErrorToggle = 0
-		"endif
-	"endfunction
-	"noremap <leader>e :call ToggleError()<CR>
+" buffer management:
+nnoremap <leader>b :ls<cr>:b<space>
 
 " I like line numbers. Should be able to toggle them, though
 set number
-function Numbertoggle()
+function! Numbertoggle()
     if &number == "nonumber"
         echom "number set"
         set number
@@ -85,7 +57,7 @@ function Numbertoggle()
         set nonumber
     endif
 endfunction
-map <F12> :call Numbertoggle()<CR>
+noremap <F12> :call Numbertoggle()<CR>
 
 " indentation. Set paste makes all input literal... because I hate when the
 " editor thinks its smarter than me
@@ -98,8 +70,9 @@ set shiftwidth=4
     au FileType clojure setl ts=2 sw=2 sts=2
     au FileType javascript setl ts=2 sw=2 sts=2
     au FileType jsx setl ts=2 sw=2 sts=2
+    au BufRead,BufNewFile  *.csv setlocal ts=13 sw=13 sts=13 noet
 set expandtab
-function Ettoggle()
+function! Ettoggle()
   if &expandtab == "noexpandtab"
     echom "expandtab set"
     set expandtab
@@ -108,31 +81,70 @@ function Ettoggle()
     set noexpandtab
   endif
 endfunction
-map <F11> :call Ettoggle()<CR>
+" noremap <F11> :call Ettoggle()<CR>
+
+autocmd FileType *.pl setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType *.pm setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " useful mappings:
-map <S-Return> <Esc>
-map <C-j> 10j
-map <C-k> 10k
-map <Space> :NERDTreeToggle<CR>
-map ; :
+noremap <S-Return> <Esc>
+noremap <C-j> 10j
+noremap <C-k> 10k
+noremap <Space> :NERDTreeToggle<CR>
+noremap ; :
 noremap zj gj
 noremap zk gk
 map , \
 noremap <leader>/ :FlyGrep<CR>
 
 " window movement. 
-map gj <C-w>j
-map gh <C-w>h
-map gk <C-w>k
-map gl <C-w>l
-map gs <C-w>s
-map gv <C-w>v
+noremap gj <C-w>j
+noremap gh <C-w>h
+noremap gk <C-w>k
+noremap gl <C-w>l
+noremap gs <C-w>s
+noremap gv <C-w>v
 noremap <Leader>d <C-w>+
 noremap <Leader>f <C-w>-
 noremap <Leader>g <C-w>>
 noremap <Leader>s <C-w><
 
-" RANDOM: make text files 100 characters wide
-au BufRead,BufNewFile *.txt setlocal textwidth=100
+" RANDOM: make text files 80 characters wide
+au BufRead,BufNewFile *.jrnl setlocal textwidth=80
+
+" also spell checking
+set spelllang=en
+au BufRead,BufNewFile *.jrnl setlocal spell
+
+
+" I want to be able to insert parentheses around visually selected text.
+" Note that this will only work assuming I keep the undesired behavior of
+" (<esc> leaving a double parenthesis
+vnoremap 0 di(<ESC>pli)<ESC>l%
+
+"I also want to remove a parenthesis and its brother
+noremap <leader>x lvi("tdxx"tp
+
+" I also want to be able to insert a single parenthesis
+noremap <leader>( i(<esc>
+
+" Here is some crap for making the noscrollbar plugin work:
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline()}
+set laststatus=2
+
+" conceal is annoying in TeX:
+let g:tex_conceal = ""
+
+" I like hilight searching, but not incsearch
+set hlsearch noincsearch
+nnoremap <leader>w :let @/=''<cr>
+
+set et
+noremap gr gT
+nnoremap gn :tabm -1<cr>
+nnoremap gm :tabm +1<cr>
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+noremap ; :
 
