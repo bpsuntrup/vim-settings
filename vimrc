@@ -83,8 +83,8 @@ function! Ettoggle()
 endfunction
 " noremap <F11> :call Ettoggle()<CR>
 
-autocmd FileType *.pl setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-autocmd FileType *.pm setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType *.pl setlocal formatoptions-=c formatoptions-=o
+autocmd FileType *.pm setlocal formatoptions-=c formatoptions-=o
 
 " useful mappings:
 noremap <S-Return> <Esc>
@@ -116,6 +116,10 @@ au BufRead,BufNewFile *.jrnl setlocal textwidth=80
 set spelllang=en
 au BufRead,BufNewFile *.jrnl setlocal spell
 
+" change badly spelled words to underline instead of hilite
+hi clear SpellBad
+hi SpellBad cterm=underline
+
 
 " I want to be able to insert parentheses around visually selected text.
 " Note that this will only work assuming I keep the undesired behavior of
@@ -138,6 +142,15 @@ let g:tex_conceal = ""
 " I like hilight searching, but not incsearch
 set hlsearch noincsearch
 nnoremap <leader>w :let @/=''<cr>
+
+" Old english ligatures
+" inoremap ae0 æ
+" inoremap Ae0 Æ
+" inoremap th0 þ
+" inoremap Th0 Þ
+" inoremap Dh0 Ð
+" inoremap dh0 ð
+
 
 set et
 noremap gr gT
