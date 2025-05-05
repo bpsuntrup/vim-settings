@@ -161,3 +161,5 @@ set shiftwidth=4
 set softtabstop=4
 noremap ; :
 
+inoremap ben `logger -t BENJAMIN `;<ESC><LEFT>i
+
