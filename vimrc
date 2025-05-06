@@ -161,8 +161,8 @@ set shiftwidth=4
 set softtabstop=4
 noremap ; :
 
-inoremap ben `logger -t \x1b[31mBENJAMIN\x1b[39m `;<ESC><LEFT>i
-inoremap udd use Data::Dumper; `logger -t BENJAMIN Dumper()`;<ESC><LEFT><LEFT>i
+" inoremap ben `logger -t \x1b[31mBENJAMIN\x1b[39m `;<ESC><LEFT>i
+" inoremap udd use Data::Dumper; `logger -t BENJAMIN Dumper()`;<ESC><LEFT><LEFT>i
 
 " universal clipboard:
 vnoremap <leader>y :w! /tmp/vim-clipboard<cr>
