@@ -83,8 +83,15 @@ function! Ettoggle()
 endfunction
 " noremap <F11> :call Ettoggle()<CR>
 
+" filetype specific settings
 autocmd FileType *.pl setlocal formatoptions-=c formatoptions-=o
 autocmd FileType *.pm setlocal formatoptions-=c formatoptions-=o
+au BufEnter *.html setlocal tabstop=2 shiftwidth=2 softtabstop=2
+au BufRead,BufNewFile *.jrnl setlocal textwidth=80
+set spelllang=en
+au BufRead,BufNewFile *.jrnl setlocal spell
+autocmd FileType *.py BufEnter * highlight OverLength ctermbg=darkgrey guibg=#111111
+autocmd FileType *.py BufEnter * match OverLength /\%100v.*/
 
 " useful mappings:
 noremap <S-Return> <Esc>
@@ -109,17 +116,9 @@ noremap <Leader>f <C-w>-
 noremap <Leader>g <C-w>>
 noremap <Leader>s <C-w><
 
-" RANDOM: make text files 80 characters wide
-au BufRead,BufNewFile *.jrnl setlocal textwidth=80
-
-" also spell checking
-set spelllang=en
-au BufRead,BufNewFile *.jrnl setlocal spell
-
 " change badly spelled words to underline instead of hilite
 hi clear SpellBad
 hi SpellBad cterm=underline
-
 
 " I want to be able to insert parentheses around visually selected text.
 " Note that this will only work assuming I keep the undesired behavior of
@@ -161,7 +160,7 @@ set shiftwidth=4
 set softtabstop=4
 noremap ; :
 
-" inoremap ben `logger -t \x1b[31mBENJAMIN\x1b[39m `;<ESC><LEFT>i
+inoremap ben print('\x1b[31mBENJAMIN\x1b[39m ');<ESC><LEFT><LEFT>i
 " inoremap udd use Data::Dumper; `logger -t BENJAMIN Dumper()`;<ESC><LEFT><LEFT>i
 
 " universal clipboard:
