@@ -32,6 +32,7 @@ let g:AutoPairs = {} "'(':')', '[':']', '{':'}'}
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * setlocal autoindent
 
 " Clipboard:
 function! Clip()
@@ -158,6 +159,7 @@ nnoremap gm :tabm +1<cr>
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set autoindent
 noremap ; :
 
 inoremap ben print('\x1b[31mBENJAMIN\x1b[39m ');<ESC><LEFT><LEFT>i
