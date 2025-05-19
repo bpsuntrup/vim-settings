@@ -1,7 +1,7 @@
 " Make vim obey XDG:
-set directory=$XDG_CACHE_HOME/vim,~/,/tmp
-set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
-set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+set directory=$XDG_CACHE_HOME/state/vim,~/,/tmp
+set backupdir=$XDG_CACHE_HOME/state/vim,~/,/tmp
+set viminfo+=n$XDG_CACHE_HOME/state/vim/viminfo
 
 " I like:
 " auto-pairs          -- smart parentheses
