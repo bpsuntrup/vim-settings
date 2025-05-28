@@ -169,4 +169,7 @@ noremap ; :
 vnoremap <leader>y :w! /tmp/vim-clipboard<cr>
 nnoremap <leader>p :r /tmp/vim-clipboard<cr>
 
+" plugins
 nnoremap gb :Git blame<cr>
+nnoremap gu :UndotreeToggle<cr><c-w>h
+
