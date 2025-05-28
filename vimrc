@@ -46,6 +46,8 @@ nnoremap <leader>c 0r+
 
 " buffer management:
 nnoremap <leader>b :ls<cr>:b<space>
+nnoremap gh :bp<cr>
+nnoremap gl :bn<cr>
 
 " I like line numbers. Should be able to toggle them, though
 set number
