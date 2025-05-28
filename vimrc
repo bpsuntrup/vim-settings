@@ -162,7 +162,7 @@ set softtabstop=4
 set autoindent
 noremap ; :
 
-inoremap ben print('\x1b[31mBENJAMIN\x1b[39m ');<ESC><LEFT><LEFT>i
+" inoremap ben print('\x1b[31mBENJAMIN\x1b[39m ');<ESC><LEFT><LEFT>i
 " inoremap udd use Data::Dumper; `logger -t BENJAMIN Dumper()`;<ESC><LEFT><LEFT>i
 
 " universal clipboard:
