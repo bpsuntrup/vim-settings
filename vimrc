@@ -46,6 +46,9 @@ nnoremap <leader>c 0r+
 
 " buffer management:
 nnoremap <leader>b :ls<cr>:b<space>
+nnoremap <C-n> :bn<cr>
+nnoremap <C-p> :bp<cr>
+nnoremap gd :bd<cr>
 
 " I like line numbers. Should be able to toggle them, though
 set number
@@ -58,7 +61,8 @@ function! Numbertoggle()
         set nonumber
     endif
 endfunction
-noremap <F12> :call Numbertoggle()<CR>
+" This conflicts with my tmux config now.
+"noremap <F12> :call Numbertoggle()<CR>
 
 " indentation. Set paste makes all input literal... because I hate when the
 " editor thinks its smarter than me
@@ -69,7 +73,7 @@ set softtabstop=4
 set shiftwidth=4
     " For clojure and javascript, I like two spaces
     au FileType clojure setl ts=2 sw=2 sts=2
-    au FileType javascript setl ts=2 sw=2 sts=2
+    au FileType javascript setl ts=4 sw=4 sts=4
     au FileType jsx setl ts=2 sw=2 sts=2
     au BufRead,BufNewFile  *.csv setlocal ts=13 sw=13 sts=13 noet
 set expandtab
